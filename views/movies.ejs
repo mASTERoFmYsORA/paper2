@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie List</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        .delete-button {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Movie List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Director</th>
+                <th>Producer</th>
+                <th>Release Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% movies.forEach(movie => { %>
+                <tr>
+                    <td><%= movie.name %></td>
+                    <td><%= movie.director %></td>
+                    <td><%= movie.producer %></td>
+                    <td><%= movie.releaseDate.toDateString() %></td>
+                    <td>
+                        <button class="delete-button" form="deleteForm<%= movie._id %>">Delete</button>
+                        <form id="deleteForm<%= movie._id %>" action="/movies/delete/<%= movie._id %>" method="POST" style="display: none;"></form>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    <a href="movies/add">Add Movie</a>
+</body>
+</html>
